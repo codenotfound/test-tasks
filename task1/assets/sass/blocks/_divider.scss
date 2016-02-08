@@ -1,0 +1,11 @@
+.divider {
+   height: 19px;
+   /* width: 1130px; */
+   width: 1070px;
+   margin: 0 auto;
+   background: linear-gradient(rgba(0,0,0,0.1),rgba(255,255,255,0.1));
+   border-radius:  0 0 80% 80%;
+   &--bottom {
+       transform: rotate(180deg);
+   }
+}

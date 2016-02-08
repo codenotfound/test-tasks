@@ -1,0 +1,11 @@
+.topnav {
+   display: block;
+   height: 40px; 
+   border-bottom: 1px solid $topnav-border-color;
+   background: $topnav-bg-color; 
+   background: linear-gradient($topnav-gradient-top 0%, 
+   $topnav-gradient-top 40%, $topnav-gradient-mid 50%,
+   $topnav-gradient-bot 60% );
+   box-shadow: 0 1px 1px 0 $topnav-dropshadow-color, //2px? doesn't look right
+               0 -1px 0 0 $topnav-innershadow-color inset; 
+}

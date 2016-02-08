@@ -1,0 +1,32 @@
+.product-button {
+    position: relative;
+    width:140px;
+    height: 30px;
+    background: $productbutton-bg-color;
+    background: linear-gradient($productbutton-gradient-top 0%, 
+    $productbutton-gradient-top 35%, $productbutton-gradient-mid 50%,
+    $productbutton-gradient-bot 65% );
+    border-radius: 25px;
+    border: 1px solid $productbutton-border-color;
+    box-shadow: 0 1px 0 0 $productbutton-innershadow-color inset,
+                0 1px 0 0 $productbutton-dropshadow-color,
+                0 0 0 6px $productbutton-bg-color; 
+    outline: none;
+    cursor: pointer;
+    &__text {
+        position: absolute;
+        top: 50%;
+        left: 21px;
+        transform: translateY(-50%);
+        font-family: 'Open Sans';
+        font-size: 14px;
+        color: $productbutton-text-color;
+        text-transform: uppercase;
+    }
+    &__arrow {
+        position: absolute;
+        top: 50%;
+        right: 24px;
+        transform: translateY(-50%)
+    }
+}

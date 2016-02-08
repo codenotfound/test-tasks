@@ -1,0 +1,33 @@
+.content-box {
+    position: absolute;
+    left: 0;
+    bottom: 70px;
+    width: 380px;
+    z-index: 100;
+    &__subheading {
+        color: $contentbox-subheading-color;
+        font-family: 'Open Sans';
+        font-size: 36px;
+    }
+    &__heading {
+        color: $contentbox-heading-color;
+        font-family: 'Open Sans';
+        font-size: 54px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+    &__description {
+        color: $contentbox-description-color;
+        font-family: 'PT Sans';
+        font-size: 18px;
+        hyphens: auto;
+        line-height: 1.5;
+        margin-bottom: 24px;
+    }
+    &__initial {
+        display: inline-block;
+        padding-bottom: 10px;
+        border-bottom: solid 4px $contentbox-heading-color;
+    }
+
+}

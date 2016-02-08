@@ -1,2 +1,9 @@
-.sass-cache/
+.sass-cache
 *.css.map
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+*.db

@@ -1,0 +1,33 @@
+.navigation {
+    display:  inline-block;
+    position: absolute;
+    bottom: 0;
+    right: -23px;
+    &__item {
+        /* display: inline-block; */
+        float: left;
+    }
+    &__link {
+        text-decoration: none;
+        font-family: 'PT Sans', sans-serif;
+        font-size: 18px;
+        color: $navigation-link-color;
+        padding: 3px 23px;
+        box-sizing: border-box;
+        border-radius: 25px;
+        border: 1px solid white;
+        transition: all 0.1s;
+        &--selected {
+            background-color: $navigation-selected-background-color;
+            border: 1px solid $navigation-selected-border-color;
+            box-shadow: 1px 1px 1px 0 $navigation-selected-innershadow-color
+            inset;
+        }
+        &--hover,&:hover {
+            background-color: $navigation-selected-background-color;
+            border: 1px solid $navigation-hover-border-color;
+            box-shadow: 0 1px 0 0 $navigation-hover-innershadow-color
+            inset;
+        }
+    }
+}

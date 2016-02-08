@@ -1,0 +1,29 @@
+//fonts
+
+/* Etelka Medium Pro */
+@include font-face("EtelkaMediumProRegular",
+    font-files("EtelkaMediumProRegular/EtelkaMediumProRegular.woff",
+    "EtelkaMediumProRegular/EtelkaMediumProRegular.eot"));
+@include font-face("EtelkaMediumProBold",
+    font-files("EtelkaMediumProBold/EtelkaMediumProBold.woff",
+    "EtelkaMediumProBold/EtelkaMediumProBold.eot"));
+/* Roboto */
+@include font-face("Roboto",
+    font-files("RobotoRegular/RobotoRegular.woff",
+    "RobotoRegular/RobotoRegular.eot"));
+@include font-face("Roboto Bold",
+    font-files("RobotoBold/RobotoBold.woff",
+    "RobotoBold/RobotoBold.eot"));
+@include font-face("Roboto Light",
+    font-files("RobotoLight/RobotoLight.woff",
+    "RobotoLight/RobotoLight.eot"));
+/* Open Sans */
+@include font-face("Open Sans",
+    font-files("OpenSansRegular/OpenSansRegular.woff",
+    "OpenSansRegular/OpenSansRegular.eot"));
+@include font-face("Open Sans Bold",
+    font-files("OpenSansBold/OpenSansBold.woff",
+    "OpenSansBold/OpenSansBold.eot"));
+@include font-face("Open Sans Light",
+    font-files("OpenSansLight/OpenSansLight.woff",
+    "OpenSansLight/OpenSansLight.eot"));
