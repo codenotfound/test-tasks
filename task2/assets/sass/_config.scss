@@ -1,0 +1,31 @@
+//GLOBAL VARIABLES
+
+//COLORS
+$blue: #6aa1c8;
+$grey: #dddddd;
+$darkgrey: #999999;
+
+//UI colors
+
+//BREAKPOINTS
+$res768p: max-width 1599px;
+$res1024w: max-width 1365px;
+$res800w: max-width 1023px;
+$res320w: max-width 799px;
+
+
+
+//TYPOGRAPHY
+//other deafults
+
+body {
+    font-size: 16px;
+    line-height:1;
+    font-family: 'Verdana', sans-serif;
+}
+* {
+    transition: all 0.3s;
+}
+
+//FONT SIZES
+

@@ -1,0 +1,30 @@
+.square {
+    display:block;
+    width: 135px;
+    height: 135px;
+    margin-bottom: 50px;
+    background-color: $darkgrey;
+    @include breakpoint($res1024w) {
+        width: 140px;
+        height: 140px;
+        float: left;
+        margin-right: 52px;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    @include breakpoint($res800w) {
+        width: 190px;
+        margin-right: 50px;
+    }
+    @include breakpoint($res320w) {
+        width: 260px;
+    }
+}
+.container > div:nth-child(3) > div:nth-child(2) > div:nth-child(3),
+div.column--smallest:nth-child(3) > div:nth-child(3)
+{
+    @include breakpoint($res768p) {
+        display:none;
+    }
+}

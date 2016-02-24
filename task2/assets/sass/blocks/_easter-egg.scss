@@ -1,0 +1,21 @@
+.easter-egg {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0.05;
+    animation: pulse 7s infinite;
+}
+
+@keyframes pulse {
+    0%   {
+        opacity: 0.05;
+    }
+    50%   {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 0.05;
+    }
+}
+

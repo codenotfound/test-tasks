@@ -1,0 +1,21 @@
+.container {
+    display: block;
+    width: 1600px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 0 65px;
+    box-sizing: border-box;
+    @include breakpoint($res768p) {
+        width: 1366px; 
+    }
+    @include breakpoint($res1024w) {
+        width: 1024px; 
+    }
+    @include breakpoint($res800w) {
+        width: 800px; 
+    }
+    @include breakpoint($res320w) {
+        width: 320px; 
+        padding: 0 30px;
+    }
+}
