@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+
+  
+  
+
+  
+  
+  
+
+  
+
+  <script type="text/javascript" src="/js/lib/dummy.js"></script>
+
+  
+
+  
+
+  
+
+  
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+  
+
+  
+
+  <style type="text/css">
+    
+  </style>
+
+  <title></title>
+
+  
+    
+
+
+
+
+<script type='text/javascript'>//<![CDATA[
+window.onload=function(){
+"use strict";
+
+var appSingleton = (function () {
+ 
+  // Instance stores a reference to the Singleton
+  var instance;  
+ 
+  function init() {
+  
+    // Private methods and variables
+    
+    var urlQueue = new Object(); // key = URL, value = how many requests are enqueued for it
+    var requestDelay = 500; //how long to wait between checking if urlQueue[url] is empty
+    
+    function makeHtmlObject(data) {
+    	//from json data to html object
+      
+      var htmlObj = document.createElement(data["tag"]); 
+      var htmlContent = document.createTextNode(data["content"]); 
+      htmlObj.appendChild(htmlContent);
+      for(var key in data["attr"]) { 	
+        htmlObj.setAttribute(key, data["attr"][key]);          
+      }
+      for(var key in data["events"]) {
+        var evHandler = new Function(data["events"][key]);   
+        htmlObj.addEventListener(key, evHandler);        
+      }
+      for(var key in data["style"]) {             
+        htmlObj.style[key] = data["style"][key];         
+      }
+      
+      return htmlObj;
+    }
+    
+    function error(textStatus, errorMessage) {
+      //handle network errors
+      var err = textStatus + ", " + errorMessage;
+      console.log( "[ERROR] : Request Failed: " + err );
+    }
+ 
+    // Singleton 
+    return {
+ 
+      // Public methods and variables
+      addObject: function (url, callbackFunc) {
+      	function wrapperGetJSON() {
+        
+        	$.ajaxSetup({ cache: false }); // to prevent too fast loading?.. NOT SURE
+        
+          $.getJSON(url)
+            .done(function( data ) {
+              //process data
+              var htmlObj = makeHtmlObject(data);
+              callbackFunc(htmlObj);
+            })
+            .fail(function( jqxhr, textStatus, errorMessage ) {
+              //throw error
+              error(textStatus, errorMessage);
+            })
+            .always(function() {
+              //remove from queue
+              urlQueue[url] -= 1;
+              if ( urlQueue[url] == 0 ) {
+                delete urlQueue[url];
+              }
+            });        
+        };
+      
+       console.log("[DEBUG]: url: " + url + " queue: " + urlQueue[url]);
+        
+        //deal with URL queue 
+        if(urlQueue[url] > 0) {        	
+        
+          //wait until URL queue frees up
+          var queueTimer = setTimeout(function wait() {
+          
+          	//console.log(urlQueue);
+          	console.log("[DEBUG]: waiting " + requestDelay + "ms...");
+          
+          	if( !(urlQueue[url] > 0) ) {
+            	//when queue is free     	
+              clearTimeout(queueTimer);
+              wrapperGetJSON();
+            }
+            else {            
+            	  queueTimer = setTimeout(wait, requestDelay);
+            }
+            
+          }, requestDelay);
+          
+        }
+        else {
+        	urlQueue[url] = 1;
+          wrapperGetJSON();
+        }          
+        
+    	},
+      
+      requestDelay: requestDelay
+ 
+    };
+ 
+  };
+ 
+  return {
+ 
+    // Get the Singleton instance if one exists
+    // or create one if it doesn't
+    getInstance: function () {
+ 
+      if ( !instance ) {
+        instance = init();
+      }
+ 
+      return instance;
+    }
+ 
+  };
+ 
+})();
+
+var app = appSingleton.getInstance();
+
+//TESTS, console and DOM output
+
+var startOfTimes = new Date();
+
+console.log("[TEST] addObject 10 times on one good URL");
+$( "body" ).append( "<div>Request delay: "+ app.requestDelay +"ms</div><br>" );
+
+for(var i=0; i<10; i++){
+  app.addObject("https://api.myjson.com/bins/3z8sy", function(obj){
+    $( "body" ).append( $( obj ) );
+    $( "body" ).append( " " + (new Date() - startOfTimes)+ "ms <br><br>" );
+  });
+}
+
+console.log("[TEST] addObject once on bad URL");
+app.addObject("https://api.myjson.com/bins/server-error", function(obj){
+	$( "body" ).append( $( obj ) );
+});
+
+
+}//]]> 
+
+</script>
+
+  
+</head>
+
+<body>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<body>
+<h2>
+JS singleton that parses remote JSON files that describe DOM nodes
+</h2>
+<div class="test"></div>
+</body>
+  
+  <script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "L6d48ue1"
+    }], "*")
+  }
+</script>
+
+</body>
+
+</html>
+

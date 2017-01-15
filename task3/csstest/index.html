@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 1 - layouts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			  crossorigin="anonymous"></script>
+    <style>
+    /* palette: http://www.colourlovers.com/palette/49963/let_them_eat_cake */
+
+        .block1 {
+            min-height: 100px;
+            background: #C5E0DC;
+            position: relative;
+        }
+        .block1:after, .block2:after, .block3:after, .block4:after {
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            font-family: sans-serif;
+            font-size: 32px;
+
+        }
+        .block1:after {
+            content: '#1';
+            top: 50%;
+                transform: translateY(-50%);
+        }
+        .stage1 .block1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            opacity: 0.7;
+        }
+        .stage2 .block1 {
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            opacity: 0.7;
+        }
+        body.stage1, body.stage2 {
+            padding-top: 100px;
+        }
+        .block2:after {
+            content: '#2';
+        }
+        .block3:after {
+            content: '#3';
+        }
+        .block4:after {
+            content: '#4';
+        }
+        .block2__line {
+            position: absolute;
+            top: calc(100% + 49px);
+            left: 0;
+            width: calc(100% - 2px);
+            height: 0;
+            border: 1px dashed #ECE5CE;
+            
+        }
+        .block2__line:after {
+            content: "line 1";
+        }
+        .block3__line {
+            position: absolute;
+            top: calc(100% + 49px);
+            right: 0;
+            width: calc(100% - 2px);
+            height: 0;
+            border: 1px dashed #F1D4AF;
+            
+        }
+        .block3__line:after {
+            content: "line 2";
+        }
+        .block2, .block3 {
+            max-width: 600px;
+            min-height: 1500px;
+            margin: 100px auto;
+            position: relative;
+                
+        }
+        .block2 {
+            background: #ECE5CE;
+        }
+        .block3 {
+            background: #F1D4AF;
+        }
+
+        @media (min-width: 1500px) {
+            .block2, .block3 {
+                float: left;
+                width: 600px;
+                margin: 100px;
+            }
+            .block3 {
+                margin-left: 0;
+            } 
+            .container {
+                overflow: hidden;
+                width: 1500px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .block3, .block2 {
+                margin: 100px;
+            }
+        }
+
+        .block4 {
+            height: 1500px;
+            background: #E08E79;
+            position: relative;
+        }
+
+        .guide {
+            position: fixed;
+            right: 0;
+            top: 0;
+            opacity: 0.7;
+            z-index: 100;
+        }
+
+
+    </style>
+</head>
+<body>
+    <img class="guide" src="http://i.imgur.com/mUAuNSw.png?1" alt="">
+    <div class="block1"></div>
+    <div class="container">
+        <div class="block2">
+            <div class="block2__line"></div>
+        </div>
+        <div class="block3">
+            <div class="block3__line"></div>
+        </div>
+    </div>
+    <div class="block4"></div>
+
+    <script>
+        //scrolling
+        $(document).ready(function () {
+            var jqWindow = $(window);
+            var jqBody = $("body");
+            var jqBlock1 = $(".block1");
+            var jqBlock2 = $(".block2");
+            var jqBlock3 = $(".block3");
+
+            // detect scroll direction
+            var scrollPosition = $(window).scrollTop();
+            var scrollDirection = "";
+
+            jqWindow.scroll(function () {
+                var scroll = jqWindow.scrollTop();
+
+                if (scroll > scrollPosition) {
+                    // scrolling downwards
+                    scrollDirection = "down";
+
+                } else {
+                    // scrolling upwards
+                    scrollDirection = "up";
+                }
+
+                console.log(scrollDirection);
+
+                scrollPosition = scroll;
+            });
+
+
+
+            //main scroll logic
+            jqWindow.scroll(function () {
+                var line1 = jqBlock2.offset().top + jqBlock2.outerHeight() +
+                    parseInt(jqBlock2.css("margin-bottom")) / 2;
+                var line2 = jqBlock3.offset().top + jqBlock3.outerHeight() +
+                    parseInt(jqBlock3.css("margin-bottom")) / 2;
+                var line2Adjust = line2 - jqBlock1.outerHeight();
+                var windowPos = jqWindow.scrollTop();
+
+
+                if(scrollDirection == "down"){
+                    if ( (windowPos >= line1) && (windowPos < line2Adjust)) {
+                        jqBlock1.removeAttr('style');
+                        jqBody.addClass("stage1");
+                    }
+                    else {
+                        jqBody.removeClass("stage1");
+                    }
+
+                    if (windowPos >= line2Adjust) {
+                        jqBody.addClass("stage2");
+                        jqBlock1.css("top", line2Adjust);
+                    }
+                    else {
+                        jqBody.removeClass("stage2");
+                    }
+                }
+
+                if(scrollDirection == "up"){
+                    jqBlock1.removeAttr('style');
+                    jqBody.removeClass("stage1");
+
+                    if ( (windowPos >= line1)  && (windowPos < line2Adjust)) {
+                        jqBody.addClass("stage2");
+                        jqBlock1.css("top", line2Adjust);
+                    }
+                    else {
+                        jqBody.removeClass("stage2");
+                    }
+                }
+
+            });
+        });
+    </script>
+    
+</body>
+</html>
