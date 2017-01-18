@@ -35,7 +35,7 @@ petrovichApp.filter('ratioFilter', function() {
 petrovichApp.controller('ProductController', [ '$scope', '$http', function ($scope, $http) {
     $scope.products = [];
 
-    $http.get( '/products.json').then(function(response){
+    $http.get( './products.json').then(function(response){
         $scope.products = response.data;
         $scope.products.forEach(function(obj){
             obj.isPriceAlt = true;
