@@ -1,0 +1,14 @@
+.p-r {
+    padding-right: 1em;
+}
+.m-b {
+    margin-bottom: 1em;
+}
+.l-d-ib {
+    display: inline-block;
+}
+
+.main-input {
+    display: inline-block !important;
+    width: auto !important;
+}

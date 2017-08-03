@@ -1,0 +1,29 @@
+<div id="content">
+    <div class="container">
+        <h1>Ежедневник</h1>
+        
+        <div>
+            <input class="form-control main-input" type="text" placeholder="нужно сделать...">
+            <button type="button" class="btn btn-sm btn-info js-add">
+                <span class="glyphicon glyphicon-pencil"></span>
+                Добавить
+            </button>
+        </div>
+        <hr>
+        
+        <h3>Текущие дела:</h3>
+        <div todo-region></div>
+        <h3>Выполненные дела:</h3>
+        <div done-region></div>
+
+        <hr>
+        <div>
+            <h2>Статистика</h2>
+            Текуших дел: <span class="js-todoTotal"></span>
+            <br>
+            Выполненных дел: <span class="js-doneTotal"></span>
+            <br>
+            Процент готовности: <span class="js-readinessPercentage"></span>
+        </div>
+    </div>
+</div>
